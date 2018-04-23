@@ -3,9 +3,11 @@ and try to avoid obstacles. I'm not sure what obstacles I want to add, but they 
 as the player navigates past levels. I will start with the mazerunner.py code I found online and change it
 significantly to make the game harder. 
 '''
-
+#i followed the tutorial on a website for this 
+#the url is 
 import pygame
- 
+
+OUCH = ""
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -15,7 +17,7 @@ PURPLE = (255, 0, 255)
  
  
 class Wall(pygame.sprite.Sprite):
-    """This class represents the bar at the bottom that the player controls """
+    #this class represents the bar at the bottom that the player controls 
  
     def __init__(self, x, y, width, height, color):
         """ Constructor function """
@@ -61,6 +63,10 @@ class Player(pygame.sprite.Sprite):
         self.change_x += x
         self.change_y += y
  
+    def ouch():
+        self.image = pygame.Surface([30, 30])
+        self.image.fill(OUCH)
+
     def move(self, walls):
         """ Find a new position for the player """
  
@@ -73,6 +79,7 @@ class Player(pygame.sprite.Sprite):
             # If we are moving right, set our right side to the left side of
             # the item we hit
             if self.change_x > 0:
+            
                 self.rect.right = block.rect.left
             else:
                 # Otherwise if we are moving left, do the opposite.
