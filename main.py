@@ -7,15 +7,20 @@ significantly to make the game harder.
 #the url is http://programarcadegames.com/python_examples/show_file.php?file=maze_runner.py
 import pygame
 
-OUCH = ""
+
+#these are RGB values (in that order)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
+BLUE = (0, 0, 204)
+GREEN = (0, 204, 0)
 RED = (255, 0, 0)
-PURPLE = (255, 0, 255)
+PURPLE = (204, 0, 204)
+YELLOW = (255, 255, 0)
+
+#this gets the background image from the directory
+# imr_dir = "C:/Users/Neerav.Gade18/OneDrive - Bellarmine College Preparatory/CompPrgm/finalPROJECT/galaxy-run/galaxy-run"
  
- 
+#make a wall class 
 class Wall(pygame.sprite.Sprite):
     #this class represents the bar at the bottom that the player controls 
  
@@ -36,8 +41,7 @@ class Wall(pygame.sprite.Sprite):
  
  
 class Player(pygame.sprite.Sprite):
-    """ This class represents the bar at the bottom that the
-    player controls """
+    #This class represents the sprite that the player controls
  
     # Set speed vector
     change_x = 0
@@ -63,9 +67,6 @@ class Player(pygame.sprite.Sprite):
         self.change_x += x
         self.change_y += y
  
-    def ouch():
-        self.image = pygame.Surface([30, 30])
-        self.image.fill(OUCH)
 
     def move(self, walls):
         """ Find a new position for the player """
@@ -79,11 +80,12 @@ class Player(pygame.sprite.Sprite):
             # If we are moving right, set our right side to the left side of
             # the item we hit
             if self.change_x > 0:
-            
+         
                 self.rect.right = block.rect.left
             else:
                 # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
+            
  
         # Move up/down
         self.rect.y += self.change_y
@@ -119,13 +121,13 @@ class Room1(Room):
         # Make the walls. (x_pos, y_pos, width, height)
  
         # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[0, 0, 20, 250, WHITE],
-                 [0, 350, 20, 250, WHITE],
-                 [780, 0, 20, 250, WHITE],
-                 [780, 350, 20, 250, WHITE],
-                 [20, 0, 760, 20, WHITE],
-                 [20, 580, 760, 20, WHITE],
-                 [390, 50, 20, 500, BLUE]
+        walls = [[0, 0, 20, 250, BLUE], #left top
+                 [0, 350, 20, 250, BLUE], #left bottom
+                 [780, 0, 20, 250, BLUE], #right top
+                 [780, 350, 20, 250, BLUE], #right bottom
+                 [20, 0, 760, 20, BLUE], #entire top
+                 [20, 580, 760, 20, BLUE], #entire bottom
+                 [390, 50, 20, 500, BLUE] #this is the wall in the middle
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -139,12 +141,12 @@ class Room2(Room):
     def __init__(self):
         super().__init__()
  
-        walls = [[0, 0, 20, 250, RED],
-                 [0, 350, 20, 250, RED],
-                 [780, 0, 20, 250, RED],
-                 [780, 350, 20, 250, RED],
-                 [20, 0, 760, 20, RED],
-                 [20, 580, 760, 20, RED],
+        walls = [[0, 0, 20, 250, PURPLE],
+                 [0, 350, 20, 250, PURPLE],
+                 [780, 0, 20, 250, PURPLE],
+                 [780, 350, 20, 250, PURPLE],
+                 [20, 0, 760, 20, PURPLE],
+                 [20, 580, 760, 20, PURPLE],
                  [190, 50, 20, 500, GREEN],
                  [590, 50, 20, 500, GREEN]
                 ]
@@ -159,12 +161,12 @@ class Room3(Room):
     def __init__(self):
         super().__init__()
  
-        walls = [[0, 0, 20, 250, PURPLE],
-                 [0, 350, 20, 250, PURPLE],
-                 [780, 0, 20, 250, PURPLE],
-                 [780, 350, 20, 250, PURPLE],
-                 [20, 0, 760, 20, PURPLE],
-                 [20, 580, 760, 20, PURPLE]
+        walls = [[0, 0, 20, 250, WHITE], 
+                 [0, 350, 20, 250, WHITE], 
+                 [780, 0, 20, 250, RED],
+                 [780, 350, 20, 250, RED],
+                 [20, 0, 760, 20, WHITE],
+                 [20, 580, 760, 20, WHITE]
                 ]
  
         for item in walls:
@@ -177,10 +179,11 @@ class Room3(Room):
                 self.wall_list.add(wall)
  
         for x in range(150, 700, 100):
-            wall = Wall(x, 200, 20, 200, WHITE)
+            wall = Wall(x, 200, 20, 200, BLUE)
             self.wall_list.add(wall)
  
- 
+
+
 def main():
     """ Main Program """
  
@@ -276,9 +279,11 @@ def main():
                 current_room = rooms[current_room_no]
                 player.rect.x = 0
  
-        # --- Drawing ---
+        # ---background and sprites ---
+        # background_image = pygame.image.load("stars.png")
+        # screen.blit(background_image, [0,0])
         screen.fill(BLACK)
- 
+
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
  
