@@ -6,8 +6,8 @@ significantly to make the game harder.
 #i followed the tutorial on a website for this 
 #the url is http://programarcadegames.com/python_examples/show_file.php?file=maze_runner.py
 import pygame
-
-
+import pygame, sys
+from pygame.locals import *
 #these are RGB values (in that order)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -16,10 +16,33 @@ GREEN = (0, 204, 0)
 RED = (255, 0, 0)
 PURPLE = (204, 0, 204)
 YELLOW = (255, 255, 0)
+clock = pygame.time.Clock()
+
+# time = 0  #In Seconds
+
+#     #GameLoop
+
+# while True:
+
+#     milli = clock.tick()  #clock.tick() returns how many milliseconds passed since the last time it was called
+
+
+#     #So it tells you how long the while loop took
+
+#     seconds = milli/1000.
+
+#     time += seconds
+
+# font = pygame.font.Font('arial', 20)
+# text = font.render(str(time), 1, (BLUE)) # The time variable being in jues's code
+# DISPLAYSURF.blit(text, (20, 300)
+
+
+
 
 #this gets the background image from the directory
-# imr_dir = "C:/Users/Neerav.Gade18/OneDrive - Bellarmine College Preparatory/CompPrgm/finalPROJECT/galaxy-run/galaxy-run"
- 
+#imr_dir = "C:/Users/Neerav.Gade18/OneDrive - Bellarmine College Preparatory/CompPrgm/finalPROJECT/galaxy-run/galaxy-run"
+
 #make a wall class 
 class Wall(pygame.sprite.Sprite):
     #this class represents the bar at the bottom that the player controls 
@@ -54,7 +77,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
  
         # Set height, width
-        self.image = pygame.Surface([15, 15])
+        self.image = pygame.Surface([17, 17])
         self.image.fill(WHITE)
  
         # Make our top-left corner the passed-in location.
@@ -80,7 +103,7 @@ class Player(pygame.sprite.Sprite):
             # If we are moving right, set our right side to the left side of
             # the item we hit
             if self.change_x > 0:
-         
+                self.image.fill(RED)
                 self.rect.right = block.rect.left
             else:
                 # Otherwise if we are moving left, do the opposite.
@@ -163,8 +186,8 @@ class Room3(Room):
  
         walls = [[0, 0, 20, 250, WHITE], 
                  [0, 350, 20, 250, WHITE], 
-                 [780, 0, 20, 250, RED],
-                 [780, 350, 20, 250, RED],
+                 [780, 0, 20, 250, WHITE],
+                 [780, 350, 20, 250, WHITE],
                  [20, 0, 760, 20, WHITE],
                  [20, 580, 760, 20, WHITE]
                 ]
@@ -194,7 +217,7 @@ def main():
     screen = pygame.display.set_mode([800, 600])
  
     # Set the title of the window
-    pygame.display.set_caption('Maze Runner')
+    pygame.display.set_caption('GALAXY RUN')
  
     # Create the player paddle object
     player = Player(50, 50)
@@ -289,7 +312,7 @@ def main():
  
         pygame.display.flip()
  
-        clock.tick(60)
+        clock.tick(100)
  
     pygame.quit()
  
