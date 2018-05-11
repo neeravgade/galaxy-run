@@ -8,6 +8,8 @@ significantly to make the game harder.
 import pygame
 import pygame, sys
 from pygame.locals import *
+
+
 #these are RGB values (in that order)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -16,32 +18,12 @@ GREEN = (0, 204, 0)
 RED = (255, 0, 0)
 PURPLE = (204, 0, 204)
 YELLOW = (255, 255, 0)
-clock = pygame.time.Clock()
-
-# time = 0  #In Seconds
-
-#     #GameLoop
-
-# while True:
-
-#     milli = clock.tick()  #clock.tick() returns how many milliseconds passed since the last time it was called
-
-
-#     #So it tells you how long the while loop took
-
-#     seconds = milli/1000.
-
-#     time += seconds
-
-# font = pygame.font.Font('arial', 20)
-# text = font.render(str(time), 1, (BLUE)) # The time variable being in jues's code
-# DISPLAYSURF.blit(text, (20, 300)
 
 
 
 
 #this gets the background image from the directory
-#imr_dir = "C:/Users/Neerav.Gade18/OneDrive - Bellarmine College Preparatory/CompPrgm/finalPROJECT/galaxy-run/galaxy-run"
+imr_dir = "C:/Users/Neerav.Gade18/OneDrive - Bellarmine College Preparatory/CompPrgm/finalPROJECT/galaxy-run/galaxy-run"
 
 #make a wall class 
 class Wall(pygame.sprite.Sprite):
@@ -241,7 +223,7 @@ def main():
     clock = pygame.time.Clock()
  
     done = False
- 
+    background_image = pygame.image.load("stars.png").convert()
     while not done:
  
         # --- Event Processing ---
@@ -303,9 +285,9 @@ def main():
                 player.rect.x = 0
  
         # ---background and sprites ---
-        # background_image = pygame.image.load("stars.png")
-        # screen.blit(background_image, [0,0])
-        screen.fill(BLACK)
+        
+        screen.blit(background_image, [0,0])
+     
 
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
